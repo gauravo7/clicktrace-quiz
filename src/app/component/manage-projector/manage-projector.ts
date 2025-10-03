@@ -6,7 +6,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { QuestionsService } from '../../services/questions/questions.service';
 import { ToastrService } from 'ngx-toastr';
-import { update } from '@angular/fire/database';
 
 @Component({
   selector: 'app-manage-projector',
@@ -15,10 +14,10 @@ import { update } from '@angular/fire/database';
   styleUrl: './manage-projector.css',
 })
 export class ManageProjector {
-
-
-  constructor(private _questionService: QuestionsService, private toastr: ToastrService) {}
-
+  constructor(
+    private _questionService: QuestionsService,
+    private toastr: ToastrService
+  ) { }
 
   question: string = '';
   options: string[] = ['', '', '', '']; // always 4 options
@@ -27,12 +26,54 @@ export class ManageProjector {
   questions$!: Observable<any[]>;
   questionsList: any = [];
 
+  // 🔹 Image upload variables
+  questionImage: string | null = null; // Cloudinary URL
+  imageFile: File | null = null;
+
+  async onImageSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files[0]) {
+      this.imageFile = input.files[0];
+
+      try {
+        this.toastr.info("Uploading image...", "Please wait");
+
+        // Upload to Cloudinary
+        const cloudName = "djx2edbwi"; 
+        const uploadPreset = "vAssistant"; 
+
+        const formData = new FormData();
+        formData.append("file", this.imageFile);
+        formData.append("upload_preset", uploadPreset);
+
+        const res = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
+          method: "POST",
+          body: formData,
+        });
+
+        const data = await res.json();
+
+        if (data.secure_url) {
+          this.questionImage = data.secure_url; // Save Cloudinary URL
+          this.toastr.success("Image uploaded successfully");
+        } else {
+          this.toastr.error("Image upload failed");
+        }
+      } catch (err) {
+        console.error(err);
+        this.toastr.error("Error uploading image");
+      }
+    }
+  }
+
   ngOnInit(): void {
     this.questions$ = this._questionService.getQuestions();
 
     this.questions$.subscribe((q: any[]) => {
       if (!q || q.length === 0) return;
       this.questionsList = q;
+      console.log(this.questionsList);
+      
     });
   }
 
@@ -44,15 +85,23 @@ export class ManageProjector {
     this.question = '';
     this.options = ['', '', '', ''];
     this.correctOptionIndex = null;
+    this.removeImage();
+  }
+
+  removeImage() {
+    this.questionImage = null;
+    this.imageFile = null;
   }
 
   submitQuestion() {
     if (this.isFormValid()) {
-      let data = {
+      let data: any = {
         question: this.question,
         options: this.options,
         correctAnswer: this.correctOptionIndex ?? -1,
+        image: this.questionImage ?? null,
       };
+
       this._questionService
         .addQuestion(data)
         .then(() => {
@@ -61,7 +110,9 @@ export class ManageProjector {
         })
         .catch(console.error);
     } else {
-      alert('Please fill in the question, all 4 options, and select the correct option.');
+      this.toastr.error(
+        'Please fill in the question, all 4 options, and select the correct option.'
+      );
     }
   }
 
@@ -118,18 +169,17 @@ export class ManageProjector {
     this._questionService
       .deleteQuestion(id)
       .then(() => {
-        this.toastr.success('Question Delete Successfully');
+        this.toastr.success('Question Deleted Successfully');
       })
       .catch(console.error);
   }
 
-  liveQuestion(id: number) {
-    
-  }
-
   stopLive(id: number) {
-    this._questionService.stopLiveQuestion().then(() => {
+    this._questionService
+      .stopLiveQuestion()
+      .then(() => {
         this.toastr.success('Stopped!! Choose Next Question');
-      }).catch(console.error);
+      })
+      .catch(console.error);
   }
 }

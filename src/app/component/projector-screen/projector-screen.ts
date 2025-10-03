@@ -102,9 +102,9 @@ export class ProjectorScreen {
     console.log(attemptAt);
     if(!!attemptAt) {
       if(this.addedAt>attemptAt) {
-        return Math.floor((this.addedAt - attemptAt) / 1000) + "(s)";
+        return Math.floor((this.addedAt - attemptAt) / 1000) + "secs";
       } else {
-        return Math.floor((attemptAt - this.addedAt) / 1000) + "(s)";
+        return Math.floor((attemptAt - this.addedAt) / 1000) + "secs";
       }
     } else {
       return "-- --";

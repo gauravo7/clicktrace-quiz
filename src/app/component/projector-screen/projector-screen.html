@@ -28,7 +28,7 @@
                             @if(!!top2) {
                             <img class="avatar" src="avatar-2.png" alt="avatar">
                             <div class="person-name">{{top2?.name}}</div>
-                             <div class="person-level">{{timeInSeconds(top2?.attemptAt)}}</div>
+                            <div class="person-level">{{timeInSeconds(top2?.attemptAt)}}</div>
                             }
                             @else{
                             <div class="trophy-wrapper animate-pulse">
@@ -121,14 +121,15 @@
                     </div>}
                     @else {
                     <div *ngFor="let item of allUser; let i = index" class="leaderboard-item">
-            
+
                         <div class="rank-badge">✨</div>
                         <img class="avatar" src="avatar-1.png" alt="avatar" style="margin-right: 16px;">
                         <div class="flex-grow-1">
                             <div class="leader-name">{{item.name}}</div>
                             <div class="leader-level">{{item.rollNo}}</div>
-                            <div class="leader-level">*******{{item.contact[7]}}{{item.contact[8]}}{{item.contact[9]}}</div>
-                           
+                            <div class="leader-level">*******{{item.contact[7]}}{{item.contact[8]}}{{item.contact[9]}}
+                            </div>
+
                         </div>
                         <div class="change-indicator" [ngClass]="item.isCorrect ? 'correct' : 'incorrect'">
                             @if(item.isCorrect){
@@ -139,7 +140,8 @@
                         </div>
                         &nbsp;&nbsp;
 
-                        <div class="correct h6 mb-0 text-danger" *ngIf="item.isCorrect" >{{timeInSeconds(item?.attemptAt)}}</div>
+                        <div class="correct h6 mb-0 text-danger" *ngIf="item.isCorrect">
+                            {{timeInSeconds(item?.attemptAt)}}</div>
 
                     </div>
                     }
@@ -152,7 +154,8 @@
                 <h6 class="fw-semibold mb-3">Question</h6>
                 <div class="winner-profile">
                     @if (liveData?.question?.length>0)
-                    { <p class="question">{{liveData?.question}}</p>}
+                    { @if(liveData?.image){<img src={{liveData?.image}} alt="questionImage" class="mb-2" width="250px">}
+                    <p class="question">{{liveData?.question}}</p>}
                     @else
                     {<app-no-questions-loader></app-no-questions-loader>}
                 </div>
