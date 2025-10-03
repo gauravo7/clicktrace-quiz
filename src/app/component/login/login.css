@@ -1,0 +1,40 @@
+/* Background gradient */
+.register-container {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #4f46e5, #3b82f6);
+}
+
+/* Card styling */
+.register-card {
+  width: 100%;
+  max-width: 380px;
+  border-radius: 20px;
+  background: #fff;
+}
+
+/* Brand title */
+.brand-title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Subtitle */
+.brand-subtitle {
+  font-size: 12px;
+  color: #6b7280;
+  margin-top: -5px;
+}
+
+/* Input fields */
+.form-control {
+  border-radius: 25px;
+  padding: 10px 15px;
+}
+
+/* Social buttons */
+.btn-circle {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+}

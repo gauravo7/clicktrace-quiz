@@ -1,0 +1,67 @@
+<!-- <div class="container">
+  <h1>{{ title }}</h1>
+
+  <div class="add-form">
+    <input type="text"
+           [(ngModel)]="newTask"
+           placeholder="Add a new task..."
+           (keyup.enter)="createTodo()">
+    <button (click)="createTodo()" [disabled]="!newTask.trim()">Add Task</button>
+  </div>
+
+  <hr>
+
+  <ul class="todo-list">
+    <li *ngFor="let todo of todos$ | async"
+        [class.completed]="todo.completed">
+
+      <ng-container *ngIf="editingTodo?.id !== todo.id; else editMode">
+        <input type="checkbox"
+               [checked]="todo.completed"
+               (change)="toggleCompleted(todo)">
+        <span class="task-text">{{ todo.task }}</span>
+
+        <div class="actions">
+          <button class="edit-btn" (click)="startEdit(todo)">Edit</button>
+          <button class="delete-btn" (click)="deleteTodo(todo.id!)">Delete</button>
+        </div>
+      </ng-container>
+
+      <ng-template #editMode>
+        <input type="text"
+               [(ngModel)]="editedTask"
+               (keyup.enter)="saveEdit()">
+        <div class="actions">
+          <button class="save-btn"
+                  (click)="saveEdit()"
+                  [disabled]="!editedTask.trim()">Save</button>
+          <button class="cancel-btn" (click)="editingTodo = null">Cancel</button>
+        </div>
+      </ng-template>
+    </li>
+
+    <li *ngIf="!(todos$ | async)?.length" class="no-items">
+      No tasks found. Start by adding one!
+    </li>
+  </ul>
+</div>
+
+<style>
+  /* Basic styling for readability */
+  .container { max-width: 600px; margin: 50px auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; font-family: sans-serif;}
+  .add-form { display: flex; gap: 10px; margin-bottom: 20px; }
+  .add-form input { flex-grow: 1; padding: 8px; border: 1px solid #ddd; }
+  .todo-list { list-style: none; padding: 0; }
+  .todo-list li { display: flex; align-items: center; justify-content: space-between; padding: 10px; border-bottom: 1px solid #eee; }
+  .task-text { flex-grow: 1; margin: 0 10px; cursor: pointer; }
+  .completed .task-text { text-decoration: line-through; color: #888; }
+  .actions button { margin-left: 5px; padding: 5px 10px; border: none; border-radius: 4px; cursor: pointer; }
+  .no-items { text-align: center; color: #999; padding: 15px 0; }
+  .edit-btn { background-color: #f0ad4e; color: white; }
+  .delete-btn { background-color: #d9534f; color: white; }
+  .save-btn { background-color: #5cb85c; color: white; }
+  .cancel-btn { background-color: #ccc; }
+</style> -->
+
+
+<router-outlet></router-outlet>

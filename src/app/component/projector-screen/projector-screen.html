@@ -1,0 +1,175 @@
+<div class="leaderboard-container">
+    <div class="main-card">
+        <!-- Header -->
+        <div class="header-section">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center gap-3">
+                    <div>
+                        <img src="O7SolutionsLogo.png" width="150px" alt="o7logo">
+                    </div>
+                </div>
+                <!-- <div class="d-flex gap-2 align-items-center">
+                    <button class="btn btn-primary px-4">New</button>
+                    <button class="btn btn-primary px-4">Start</button>
+                    <button class="btn btn-primary px-4">End</button>
+                </div> -->
+            </div>
+        </div>
+
+        <div class="row g-4 content-section">
+            <!-- Left Column - Podium & List -->
+            <div class="col-lg-7">
+                <!-- Podium -->
+                <div class="podium-card">
+                    <div class="row text-center justify-content-center align-items-end">
+
+
+                        <div class="col-4 podium-position">
+                            @if(!!top2) {
+                            <img class="avatar" src="avatar-2.png" alt="avatar">
+                            <div class="person-name">{{top2?.name}}</div>
+                             <div class="person-level">{{timeInSeconds(top2?.attemptAt)}}</div>
+                            }
+                            @else{
+                            <div class="trophy-wrapper animate-pulse">
+                                <svg class="trophy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+                                    <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+                                    <path d="M4 22h16"></path>
+                                    <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
+                                    <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22">
+                                    </path>
+                                    <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
+                                </svg>
+                                <div class="sparkle">✨</div>
+                            </div>
+                            }
+                            <!-- Podium block -->
+                            <div class="podium-block rank-2">
+                                <p>2</p>
+                            </div>
+                        </div>
+
+                        <div class="col-4 podium-position">
+                            @if(!!top1) {
+                            <img class="avatar" src="avatar-1.png" alt="avatar">
+                            <div class="person-name">{{top1?.name}}</div>
+                            <div class="person-level">{{timeInSeconds(top1?.attemptAt)}}</div>
+                            }@else{
+                            <div class="trophy-wrapper animate-pulse">
+                                <svg class="trophy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+                                    <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+                                    <path d="M4 22h16"></path>
+                                    <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
+                                    <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22">
+                                    </path>
+                                    <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
+                                </svg>
+                                <div class="sparkle">✨</div>
+                            </div>
+                            }
+                            <!-- Podium block -->
+                            <div class="podium-block rank-1">
+                                <p>1</p>
+                            </div>
+                        </div>
+
+                        <div class="col-4 podium-position">
+                            @if(!!top3) {
+                            <img class="avatar" src="avatar-3.png" alt="avatar">
+                            <div class="person-name">{{top3?.name}}</div>
+                            <div class="person-level">{{timeInSeconds(top3?.attemptAt)}}</div>
+                            }
+                            @else{
+                            <div class="trophy-wrapper animate-pulse">
+                                <svg class="trophy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+                                    <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+                                    <path d="M4 22h16"></path>
+                                    <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
+                                    <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22">
+                                    </path>
+                                    <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
+                                </svg>
+                                <div class="sparkle">✨</div>
+                            </div>
+                            }
+                            <!-- Podium block -->
+                            <div class="podium-block rank-3">
+                                <p>3</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Leaderboard List -->
+                <div class="leaderboard-list mt-4">
+                    @if(!allUser || allUser.length === 0) {
+                    <div *ngFor="let skeleton of [1,2,3,4,5]" class="leaderboard-item skeleton-item">
+                        <div class="skeleton rank-badge-skeleton"></div>
+                        <div class="skeleton avatar-skeleton"></div>
+                        <div class="flex-grow-1">
+                            <div class="skeleton skeleton-name"></div>
+                            <div class="skeleton skeleton-level"></div>
+                        </div>
+                        <div class="skeleton skeleton-indicator"></div>
+                    </div>}
+                    @else {
+                    <div *ngFor="let item of allUser; let i = index" class="leaderboard-item">
+            
+                        <div class="rank-badge">✨</div>
+                        <img class="avatar" src="avatar-1.png" alt="avatar" style="margin-right: 16px;">
+                        <div class="flex-grow-1">
+                            <div class="leader-name">{{item.name}}</div>
+                            <div class="leader-level">{{item.rollNo}}</div>
+                            <div class="leader-level">*******{{item.contact[7]}}{{item.contact[8]}}{{item.contact[9]}}</div>
+                           
+                        </div>
+                        <div class="change-indicator" [ngClass]="item.isCorrect ? 'correct' : 'incorrect'">
+                            @if(item.isCorrect){
+                            Correct
+                            }@else {
+                            Incorrect
+                            }
+                        </div>
+                        &nbsp;&nbsp;
+
+                        <div class="correct h6 mb-0 text-danger" *ngIf="item.isCorrect" >{{timeInSeconds(item?.attemptAt)}}</div>
+
+                    </div>
+                    }
+                </div>
+            </div>
+
+            <!-- Right Column - Profile & Achievements -->
+            <div class="col-lg-5">
+                <!-- Winner Profile -->
+                <h6 class="fw-semibold mb-3">Question</h6>
+                <div class="winner-profile">
+                    @if (liveData?.question?.length>0)
+                    { <p class="question">{{liveData?.question}}</p>}
+                    @else
+                    {<app-no-questions-loader></app-no-questions-loader>}
+                </div>
+
+                <!-- Achievements -->
+                <div class="achievements-section">
+                    @if(liveData?.question?.length) {
+                    <h6 class="fw-semibold mb-3">Options</h6>
+                    <div class="row g-3">
+                        <div *ngFor="let achievement of liveData.options;let i = index" class="col-6">
+                            <div class="achievement-badge">
+                                <div class="achievement-level">{{options[i]}}. &nbsp;{{achievement}}</div>
+                            </div>
+                        </div>
+                    </div>}
+                </div>
+            </div>
+        </div>
+
+    </div>

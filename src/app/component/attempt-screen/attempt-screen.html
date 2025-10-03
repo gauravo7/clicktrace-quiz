@@ -1,0 +1,49 @@
+<div class="screen-wrapper">
+  <div class="container">
+    <!-- Header Section -->
+    <div class="header">
+      <img class="logo" src="O7SolutionsLogo.png" alt="O7 Solutions Logo">
+      <h1 class="brand-title">
+        Clicks<span class="text-primary">Race</span>
+      </h1>
+
+    </div>
+    <!-- Animated Status Indicator -->
+    <div class="status-indicator">
+      <div class="pulse-ring"></div>
+      <div class="status-dot"></div>
+    </div>
+          @if(liveData?.isStart && !attempted){
+          <!-- Question Prompt -->
+          <div class="question-prompt">
+            <p class="prompt-text">Choose your answer quickly!</p>
+            <div class="timer-bar">
+              <div class="timer-fill"></div>
+            </div>
+          </div>
+
+          <!-- Button Grid -->
+          <div class="button-grid">
+            <button class="option-btn" *ngFor="let option of options; let i = index" [class.clicked]="clickedOption === option"
+              (click)="onButtonClick(i)">
+              <span class="option-letter">{{ option }}</span>
+              <span class="option-ripple"></span>
+            </button>
+          </div>
+
+          <!-- Footer Info -->
+          <div class="footer-info">
+            <div class="participant-count">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                <path
+                  d="M8 8a3 3 0 100-6 3 3 0 000 6zm2 1a4 4 0 00-4 0c-1.18.56-2 1.73-2 3.09V14h8v-1.91c0-1.36-.82-2.53-2-3.09z" />
+              </svg>
+              <!-- <span>12 Active Players</span> -->
+            </div>
+          </div>
+        }
+          @else{
+          <app-no-questions-loader></app-no-questions-loader>
+          }
+  </div>
+</div>

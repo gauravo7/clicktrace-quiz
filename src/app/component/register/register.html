@@ -1,0 +1,32 @@
+<div class="register-container d-flex justify-content-center align-items-center">
+    <div class="card register-card p-4 shadow-lg">
+        <div class="text-center mb-3">
+            <h2 class="brand-title">Clicks<span class="text-primary">Race</span></h2>
+        </div>
+
+        <h5 class="text-center mb-3">Create Your Account</h5>
+
+        <form [formGroup]="formGroup" (ngSubmit)="submit()">
+            <!-- Name -->
+            <div class="form-group mb-3">
+                <input type="text" class="form-control" placeholder="Full Name" formControlName="name"  required />
+            </div>
+
+            <!-- Contact -->
+            <div class="form-group mb-3">
+                <input type="text" class="form-control" placeholder="Contact" formControlName="contact"  required />
+            </div>
+
+    
+            <!-- Roll No. -->
+            <div class="form-group mb-3">
+                <input type="text" class="form-control" placeholder="Roll No." formControlName="rollNo"  required />
+            </div>
+
+            <!-- Register Button -->
+            <button type="submit" class="btn btn-primary w-100 rounded-pill">
+                REGISTER
+            </button>
+        </form>
+    </div>
+</div>
