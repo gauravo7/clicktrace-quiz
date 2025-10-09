@@ -69,7 +69,7 @@ export class AttemptScreen {
       user.attemptAt = Date.now();
       this._questionService.saveAnswertoLeaderBoard(user);
     } else {
-      this.toastr.error("Wrong Answer");
+      // this.toastr.error("Wrong Answer");
       let user:any = this.userData.getData();
       user.isCorrect = false;
       user.attemptAt = Date.now();

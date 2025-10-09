@@ -24,7 +24,9 @@ export class ManageProjector {
   correctOptionIndex: number | null = null; // stores selected correct answer
 
   questions$!: Observable<any[]>;
+  liveQuestion$!: Observable<any[]>;
   questionsList: any = [];
+  liveData:any = [];
 
   // 🔹 Image upload variables
   questionImage: string | null = null; // Cloudinary URL
@@ -39,8 +41,8 @@ export class ManageProjector {
         this.toastr.info("Uploading image...", "Please wait");
 
         // Upload to Cloudinary
-        const cloudName = "djx2edbwi"; 
-        const uploadPreset = "vAssistant"; 
+        const cloudName = "djx2edbwi";
+        const uploadPreset = "vAssistant";
 
         const formData = new FormData();
         formData.append("file", this.imageFile);
@@ -73,7 +75,12 @@ export class ManageProjector {
       if (!q || q.length === 0) return;
       this.questionsList = q;
       console.log(this.questionsList);
-      
+    });
+
+    this.liveQuestion$ = this._questionService.getLiveQuestion();
+     this.liveQuestion$.subscribe((q: any[]) => {
+      // Assuming you want the first live question
+      this.liveData = q[0];
     });
   }
 
@@ -182,4 +189,15 @@ export class ManageProjector {
       })
       .catch(console.error);
   }
+
+   showOptions(id: number) {
+    this._questionService
+      .showOptions(id)
+      .then(() => {
+        this.toastr.success('Options Lived !!');
+      })
+      .catch(console.error);
+  }
+
+
 }

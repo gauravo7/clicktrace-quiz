@@ -81,10 +81,10 @@ export class QuestionsService {
         const liveQuestion = {
           question: {
             ...question,
-            isStart: true,
+            isStart: false,
             isEnd: false,
             leaderboard: [],
-            addedAt: Date.now()
+            addedAt: Date.now(),
           }
         };
 
@@ -133,10 +133,14 @@ export class QuestionsService {
         );
       }
 
-      saveAnswertoLeaderBoard(user: any): Promise<void> {
+    saveAnswertoLeaderBoard(user: any): Promise<void> {
            const leaderboardRef = ref(this.db, 'live/question/leaderboard');
             return push(leaderboardRef, user).then(() => {}
           );
       }
+    showOptions(id:any) {
+       const liveRef = ref(this.db, `live/question`);
+       return update(liveRef,{isStart:true, addedAt: Date.now()})
+    }
 
 }

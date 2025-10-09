@@ -42,9 +42,10 @@ export class Register {
     const formValue = this.formGroup.value;
     if(this.formGroup.valid) {
       this._student.register(this.formGroup.value).then(() => {
-          alert('User saved successfully!');
-          this.router.navigate(['/race']);
+          // alert('User saved successfully!');
           this.authService.setData(this.formGroup.value);
+          this.toastr.success('User Verified !!');
+          this.router.navigate(['/race']);
       });
     }else{
       this.toastr.error("Invalid input")
